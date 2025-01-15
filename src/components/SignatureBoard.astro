@@ -1,0 +1,123 @@
+---
+import Window from './Window.astro';
+---
+
+<Window title="$1GN4TUR3$.DB" class="w-full max-w-md mx-auto">
+  <div class="p-4 space-y-4">
+    <form id="signature-form" class="space-y-2">
+      <input 
+        type="text" 
+        id="signature-input"
+        maxlength="100"
+        placeholder="L34V3 Y0UR M4RK..."
+        class="w-full bg-black/20 border border-[#FF6AD5]/50 focus:border-[#FF6AD5] p-2 text-white text-sm outline-none transition-colors placeholder:text-white/50"
+      />
+      <button 
+        type="submit"
+        class="w-full bg-[#FF6AD5]/20 hover:bg-[#FF6AD5]/30 border border-[#FF6AD5]/50 hover:border-[#FF6AD5] p-2 text-white text-sm transition-all"
+      >
+        $UBM1T.EXE
+      </button>
+    </form>
+
+    <div id="messages" class="space-y-2 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar"></div>
+  </div>
+</Window>
+
+<style>
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 106, 213, 0.5);
+    border-radius: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 106, 213, 0.8);
+  }
+</style>
+
+<script>
+  interface Message {
+    id: string;
+    message: string;
+    created_at: string;
+  }
+
+  let messages: Message[] = [];
+
+  function formatDate(dateStr: string): string {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('en-US', { 
+      month: 'short', 
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }
+
+  async function loadMessages() {
+    try {
+      const response = await fetch('/.netlify/functions/signatures');
+      const data = await response.json();
+      messages = data;
+      displayMessages();
+    } catch (error) {
+      console.error('Error loading messages:', error);
+    }
+  }
+
+  function displayMessages() {
+    const messagesDiv = document.getElementById('messages');
+    if (!messagesDiv) return;
+
+    messagesDiv.innerHTML = messages
+      .map(msg => `
+        <div class="message p-2 border border-[#FF6AD5]/50 hover:border-[#FF6AD5] transition-colors relative group">
+          <div class="message-text break-words">${msg.message}</div>
+          <div class="text-[10px] text-[#C774E8] mt-1 group-hover:text-[#FF6AD5] transition-colors">
+            ⚡️ ${formatDate(msg.created_at)}
+          </div>
+          <div class="absolute -inset-[1px] bg-[#FF6AD5]/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+        </div>
+      `)
+      .join('');
+  }
+
+  const form = document.getElementById('signature-form') as HTMLFormElement;
+  const input = document.getElementById('signature-input') as HTMLInputElement;
+
+  if (form && input) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const message = input.value.trim();
+      if (message) {
+        try {
+          const response = await fetch('/.netlify/functions/signatures', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ message }),
+          });
+          
+          if (response.ok) {
+            input.value = '';
+            await loadMessages();
+          }
+        } catch (error) {
+          console.error('Error posting message:', error);
+        }
+      }
+    });
+  }
+
+  loadMessages();
+  setInterval(loadMessages, 30000); // Refresh every 30 seconds
+</script> 

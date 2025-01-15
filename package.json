@@ -11,6 +11,8 @@
   "dependencies": {
     "@astrojs/tailwind": "^5.1.4",
     "@motionone/dom": "^10.18.0",
+    "@netlify/functions": "github:netlify/functions",
+    "@supabase/supabase-js": "^2.47.14",
     "astro": "^5.1.7",
     "framer-motion": "^11.18.0",
     "tailwindcss": "^3.4.17"
