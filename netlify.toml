@@ -3,10 +3,14 @@
   publish = "dist"
   functions = "netlify/functions"
 
-[functions]
-  node_bundler = "esbuild"
+[dev]
+  command = "npm run dev"
+  targetPort = 4321
+  port = 8888
+  publish = "dist"
+  framework = "astro"
 
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
   status = 200 

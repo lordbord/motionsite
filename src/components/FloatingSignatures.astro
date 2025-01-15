@@ -1,0 +1,136 @@
+---
+interface Message {
+  message: string;
+}
+
+const response = await fetch(`${import.meta.env.SUPABASE_URL}/rest/v1/signatures?select=message`, {
+  headers: {
+    'apikey': import.meta.env.SUPABASE_ANON_KEY,
+    'Authorization': `Bearer ${import.meta.env.SUPABASE_ANON_KEY}`
+  }
+});
+
+const messages: Message[] = await response.json();
+---
+
+<div class="fixed inset-0 pointer-events-none select-none overflow-hidden z-[-1]">
+  {messages.map((msg, index) => (
+    <div 
+      class="floating-text absolute whitespace-nowrap opacity-0 text-[#FF6AD5] font-mono"
+      style={`
+        --start-x: ${Math.random() * 100}vw;
+        --start-y: ${Math.random() * 100}vh;
+        --duration: ${15 + Math.random() * 20}s;
+        --delay: -${Math.random() * 40}s;
+        --glitch-intensity: ${0.5 + Math.random() * 0.5};
+        animation: float var(--duration) linear var(--delay) infinite;
+      `}
+    >
+      <span class="glitch-text" data-text={msg.message}>{msg.message}</span>
+    </div>
+  ))}
+</div>
+
+<style>
+  @keyframes float {
+    0% {
+      transform: translate(var(--start-x), var(--start-y)) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.15;
+    }
+    90% {
+      opacity: 0.15;
+    }
+    100% {
+      transform: translate(
+        calc(var(--start-x) + 20vw),
+        calc(var(--start-y) - 100vh)
+      ) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  .floating-text {
+    font-family: 'Press Start 2P', monospace;
+    text-shadow: 
+      0 0 5px rgba(255, 106, 213, 0.5),
+      0 0 10px rgba(255, 106, 213, 0.3),
+      0 0 15px rgba(255, 106, 213, 0.2);
+    filter: blur(0.5px);
+  }
+
+  .glitch-text {
+    position: relative;
+    animation: glitch 0.5s infinite;
+  }
+
+  .glitch-text::before,
+  .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.8;
+  }
+
+  .glitch-text::before {
+    animation: glitch-top 1s infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+    transform: translate(-2px, -2px);
+    color: #0ff;
+  }
+
+  .glitch-text::after {
+    animation: glitch-bottom 1.5s infinite;
+    clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+    transform: translate(2px, 2px);
+    color: #f0f;
+  }
+
+  @keyframes glitch {
+    0% {
+      transform: translate(0);
+    }
+    20% {
+      transform: translate(-1px, 1px);
+    }
+    40% {
+      transform: translate(-1px, -1px);
+    }
+    60% {
+      transform: translate(1px, 1px);
+    }
+    80% {
+      transform: translate(1px, -1px);
+    }
+    100% {
+      transform: translate(0);
+    }
+  }
+
+  @keyframes glitch-top {
+    0% {
+      transform: translate(-2px, -2px);
+    }
+    50% {
+      transform: translate(1px, 1px);
+    }
+    100% {
+      transform: translate(-2px, -2px);
+    }
+  }
+
+  @keyframes glitch-bottom {
+    0% {
+      transform: translate(2px, 2px);
+    }
+    50% {
+      transform: translate(-1px, -1px);
+    }
+    100% {
+      transform: translate(2px, 2px);
+    }
+  }
+</style> 

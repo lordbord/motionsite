@@ -152,7 +152,7 @@ import Button from '../components/Button.astro';
   // Function to fetch signatures
   async function fetchSignatures() {
     try {
-      const response = await fetch('/.netlify/functions/signatures');
+      const response = await fetch('/api/signatures');
       messages = await response.json();
       renderSignatures();
     } catch (error) {
@@ -195,7 +195,7 @@ import Button from '../components/Button.astro';
 
       if (message) {
         try {
-          const response = await fetch('/.netlify/functions/signatures', {
+          const response = await fetch('/api/signatures', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
