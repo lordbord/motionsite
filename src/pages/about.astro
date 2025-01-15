@@ -6,20 +6,22 @@ import Button from '../components/Button.astro';
 
 <Layout title="4B0UT_L0RD_J0RD.TXT">
   <main class="container mx-auto px-4 py-8 min-h-screen overflow-y-auto">
-    <div class="flex justify-between items-center mb-8 pt-24">
-      <a href="/" class="group">
-        <Button class="flex items-center gap-2">
-          <span class="text-lg group-hover:-translate-x-1 transition-transform">←</span>
-          <span>RETURN.EXE</span>
-        </Button>
-      </a>
-      <div class="text-center flex-1">
+    <div class="flex flex-col sm:flex-row sm:justify-between items-center mb-8 pt-16 sm:pt-24 relative">
+      <div class="absolute top-0 left-0 sm:relative sm:top-auto sm:left-auto mb-4 sm:mb-0">
+        <a href="/" class="group">
+          <Button class="flex items-center gap-2">
+            <span class="text-lg group-hover:-translate-x-1 transition-transform">←</span>
+            <span>RETURN.EXE</span>
+          </Button>
+        </a>
+      </div>
+      <div class="text-center flex-1 sm:flex-initial">
         <h1 class="text-3xl sm:text-4xl font-bold tracking-[0.2em] text-white drop-shadow-[0_0_10px_rgba(255,106,213,0.8)]">
           4B0UT.EXE
         </h1>
         <p class="text-white text-xs sm:text-sm mt-2 tracking-[0.3em]">⚡️ $Y$T3M_1NF0 ⚡️</p>
       </div>
-      <div class="w-[106px]"></div>
+      <div class="hidden sm:block w-[106px]"></div>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 max-w-6xl mx-auto">
