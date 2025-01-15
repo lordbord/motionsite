@@ -1,0 +1,67 @@
+---
+---
+
+<div id="page-transition" class="fixed inset-0 z-50 pointer-events-none">
+  <div class="absolute inset-0 bg-gradient-to-br from-[#FF6AD5] via-[#C774E8] to-[#AD8CFF] transform origin-left"></div>
+  <div class="absolute inset-0 grid place-items-center">
+    <div class="text-white text-4xl font-bold tracking-[0.3em] transform">
+      L0RD J0RD
+    </div>
+  </div>
+</div>
+
+<script>
+  import * as motion from "@motionone/dom";
+
+  let isTransitioning = false;
+
+  // Initial page load animation
+  motion.animate(
+    "#page-transition > div:first-child",
+    { scaleX: [1, 0] },
+    { duration: 0.8, easing: [0.65, 0, 0.35, 1] }
+  );
+  motion.animate(
+    "#page-transition > div:last-child",
+    { opacity: [1, 0] },
+    { duration: 0.4, delay: 0.3 }
+  );
+
+  // Handle link clicks
+  document.addEventListener('click', async (e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    const link = target.closest('a');
+    if (!link || !link.href || link.target || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || isTransitioning) return;
+
+    e.preventDefault();
+    isTransitioning = true;
+
+    // Animate out
+    await Promise.all([
+      motion.animate(
+        "#page-transition > div:first-child",
+        { scaleX: [0, 1] },
+        { duration: 0.8, easing: [0.65, 0, 0.35, 1] }
+      ).finished,
+      motion.animate(
+        "#page-transition > div:last-child",
+        { opacity: [0, 1] },
+        { duration: 0.4 }
+      ).finished
+    ]);
+
+    // Navigate
+    window.location.href = link.href;
+  });
+</script>
+
+<style>
+  #page-transition > div:first-child {
+    transform: scaleX(1);
+  }
+  
+  #page-transition > div:last-child {
+    opacity: 1;
+    text-shadow: 0 0 20px rgba(255,106,213,0.8);
+  }
+</style> 

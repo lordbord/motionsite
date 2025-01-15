@@ -1,0 +1,127 @@
+---
+const emojis = {
+  tech: ['💾', '💻', '📱', '🌐', '⚡️', '🔮'],
+  vaporwave: ['🌴', '🌺', '🎵', '🌈', '✨', '🌙'],
+  aesthetic: ['👾', '🎪', '🎮', '🕹️', '📼', '💫'],
+  glitch: ['🔷', '🔶', '💠', '🔹', '🔸', '💎']
+};
+
+// Create random positions for emojis
+const createEmojiPositions = (category: string[]) => {
+  return category.map((emoji) => ({
+    emoji,
+    top: Math.random() * 80 + 10, // 10-90%
+    left: Math.random() * 80 + 10, // 10-90%
+    size: Math.random() * 2 + 2,   // 2-4em
+    delay: Math.random() * 2,      // 0-2s
+    duration: Math.random() * 4 + 6 // 6-10s
+  }));
+};
+
+const allEmojis = [
+  ...createEmojiPositions(emojis.tech),
+  ...createEmojiPositions(emojis.vaporwave),
+  ...createEmojiPositions(emojis.aesthetic),
+  ...createEmojiPositions(emojis.glitch)
+];
+---
+
+<div class="fixed inset-0 overflow-hidden pointer-events-none select-none">
+  <!-- Retro sun -->
+  <div class="absolute top-[5%] left-1/2 -translate-x-1/2 w-48 h-48 bg-gradient-to-b from-[#FF6AD5] to-[#C774E8] rounded-full opacity-30 blur-xl"></div>
+  
+  <!-- Grid horizon -->
+  <div class="absolute bottom-0 left-0 w-full h-[40vh] perspective">
+    <div class="absolute bottom-0 left-0 w-full h-full grid-horizon"></div>
+  </div>
+
+  <!-- Floating emojis -->
+  {allEmojis.map((item) => (
+    <div 
+      class="absolute emoji-float"
+      style={`
+        top: ${item.top}%;
+        left: ${item.left}%;
+        font-size: ${item.size}em;
+        opacity: 0.2;
+        animation-delay: ${item.delay}s;
+        animation-duration: ${item.duration}s;
+      `}
+    >
+      {item.emoji}
+    </div>
+  ))}
+</div>
+
+<style>
+  .perspective {
+    perspective: 500px;
+  }
+  
+  .grid-horizon {
+    background-image: linear-gradient(0deg, rgba(255,106,213,0.2) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,106,213,0.2) 1px, transparent 1px);
+    background-size: 40px 40px;
+    transform: rotateX(45deg);
+    transform-origin: bottom;
+    animation: grid-move 20s linear infinite;
+  }
+  
+  @keyframes grid-move {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 0 40px;
+    }
+  }
+
+  .emoji-float {
+    animation: float var(--duration, 8s) ease-in-out infinite;
+    filter: hue-rotate(45deg) saturate(1.5) drop-shadow(0 0 10px rgba(255,106,213,0.5));
+    transform-origin: center;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translate(0, 0) rotate(0deg) scale(1);
+      filter: hue-rotate(45deg) saturate(1.5) drop-shadow(0 0 10px rgba(255,106,213,0.5));
+    }
+    25% {
+      transform: translate(10px, -15px) rotate(10deg) scale(1.1);
+      filter: hue-rotate(90deg) saturate(2) drop-shadow(0 0 15px rgba(173,140,255,0.6));
+    }
+    50% {
+      transform: translate(-5px, -25px) rotate(-5deg) scale(0.9);
+      filter: hue-rotate(180deg) saturate(1.8) drop-shadow(0 0 20px rgba(199,116,232,0.7));
+    }
+    75% {
+      transform: translate(-15px, -10px) rotate(-15deg) scale(1.2);
+      filter: hue-rotate(270deg) saturate(2.2) drop-shadow(0 0 25px rgba(255,106,213,0.8));
+    }
+  }
+
+  /* Add glitch effect to some emojis */
+  .emoji-float:nth-child(3n) {
+    animation: float-glitch var(--duration, 8s) ease-in-out infinite;
+  }
+
+  @keyframes float-glitch {
+    0%, 100% {
+      transform: translate(0, 0) rotate(0deg) scale(1);
+      filter: hue-rotate(45deg) saturate(1.5) drop-shadow(0 0 10px rgba(255,106,213,0.5));
+    }
+    25% {
+      transform: translate(12px, -18px) rotate(15deg) scale(1.15) skew(5deg);
+      filter: hue-rotate(90deg) saturate(2) drop-shadow(5px -5px 15px rgba(173,140,255,0.6));
+    }
+    50% {
+      transform: translate(-8px, -30px) rotate(-8deg) scale(0.85) skew(-5deg);
+      filter: hue-rotate(180deg) saturate(1.8) drop-shadow(-5px 5px 20px rgba(199,116,232,0.7));
+    }
+    75% {
+      transform: translate(-18px, -12px) rotate(-20deg) scale(1.25) skew(8deg);
+      filter: hue-rotate(270deg) saturate(2.2) drop-shadow(8px 8px 25px rgba(255,106,213,0.8));
+    }
+  }
+</style> 

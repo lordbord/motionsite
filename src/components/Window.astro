@@ -1,0 +1,18 @@
+---
+interface Props {
+  title: string;
+  class?: string;
+}
+
+const { title, class: className } = Astro.props;
+---
+
+<div class:list={["backdrop-blur-sm bg-white/20 border-2 border-[#FF6AD5] shadow-[0_0_15px_rgba(255,106,213,0.5)] p-1", className]}>
+  <div class="bg-[#AD8CFF] text-white px-2 py-1 flex items-center justify-between mb-1 border-b-2 border-[#FF6AD5]">
+    <span class="text-sm tracking-[0.2em]">{title}</span>
+    <button class="px-2 bg-[#FF6AD5] hover:bg-[#ff8de0] text-white transition-colors">✖</button>
+  </div>
+  <div class="p-2 text-white">
+    <slot />
+  </div>
+</div> 

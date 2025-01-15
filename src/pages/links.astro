@@ -1,0 +1,71 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Window from '../components/Window.astro';
+import Button from '../components/Button.astro';
+
+const links = [
+  {
+    title: "𝙃𝘼𝘾𝙆𝙄𝙉𝙂 𝙏𝙊𝙊𝙇𝙎 ⚡️",
+    links: [
+      { name: "H4X0R T00L 1", url: "#", description: "1337 hacking utility" },
+      { name: "CYPH3R BR34K3R", url: "#", description: "Decode the matrix" },
+    ]
+  },
+  {
+    title: "𝘾𝙊𝙊𝙇 𝙎𝙄𝙏𝙀𝙎 🌐",
+    links: [
+      { name: "VAPORWAVE RADIO", url: "#", description: "24/7 aesthetic vibes" },
+      { name: "RETRO ARCHIVE", url: "#", description: "Old school cool" },
+    ]
+  },
+  {
+    title: "𝙈𝙔 𝙋𝙍𝙊𝙅𝙀𝘾𝙏𝙎 💾",
+    links: [
+      { name: "PROJECT ALPHA", url: "#", description: "Top secret" },
+      { name: "CYBER REALM", url: "#", description: "Digital dreams" },
+    ]
+  }
+];
+---
+
+<Layout title="L0RD J0RD'$ L1NK$">
+  <main class="container mx-auto px-4 py-8 min-h-screen overflow-y-auto">
+    <div class="flex justify-between items-center mb-8 pt-24">
+      <a href="/" class="group">
+        <Button class="flex items-center gap-2">
+          <span class="text-lg group-hover:-translate-x-1 transition-transform">←</span>
+          <span>RETURN.EXE</span>
+        </Button>
+      </a>
+      <div class="text-center flex-1">
+        <h1 class="text-3xl sm:text-4xl font-bold tracking-[0.2em] text-white drop-shadow-[0_0_10px_rgba(255,106,213,0.8)]">
+          L1NK$.SYS
+        </h1>
+        <p class="text-white text-xs sm:text-sm mt-2 tracking-[0.3em]">⚡️ C00L_$TUFF ⚡️</p>
+      </div>
+      <div class="w-[106px]"></div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 max-w-7xl mx-auto">
+      {links.map(section => (
+        <Window title={section.title} class="h-full">
+          <div class="p-3 sm:p-4 space-y-4">
+            {section.links.map(link => (
+              <a href={link.url} target="_blank" rel="noopener noreferrer" 
+                class="block p-2 rounded hover:bg-white/5 transition-colors">
+                <h3 class="text-[#FF6AD5] font-bold">{link.name}</h3>
+                <p class="text-sm text-white/80 mt-1">{link.description}</p>
+              </a>
+            ))}
+          </div>
+        </Window>
+      ))}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  a:hover h3 {
+    text-shadow: 0 0 10px rgba(255,106,213,0.8);
+  }
+</style> 

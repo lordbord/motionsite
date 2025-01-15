@@ -1,0 +1,115 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Window from '../components/Window.astro';
+import Button from '../components/Button.astro';
+---
+
+<Layout title="4B0UT_L0RD_J0RD.TXT">
+  <main class="container mx-auto px-4 py-8 min-h-screen overflow-y-auto">
+    <div class="flex justify-between items-center mb-8 pt-24">
+      <a href="/" class="group">
+        <Button class="flex items-center gap-2">
+          <span class="text-lg group-hover:-translate-x-1 transition-transform">←</span>
+          <span>RETURN.EXE</span>
+        </Button>
+      </a>
+      <div class="text-center flex-1">
+        <h1 class="text-3xl sm:text-4xl font-bold tracking-[0.2em] text-white drop-shadow-[0_0_10px_rgba(255,106,213,0.8)]">
+          4B0UT.EXE
+        </h1>
+        <p class="text-white text-xs sm:text-sm mt-2 tracking-[0.3em]">⚡️ $Y$T3M_1NF0 ⚡️</p>
+      </div>
+      <div class="w-[106px]"></div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 max-w-6xl mx-auto">
+      <!-- Main Bio -->
+      <Window title="US3R_PR0F1L3.TXT" class="lg:col-span-2">
+        <div class="space-y-4 sm:space-y-6 p-3 sm:p-4">
+          <div class="text-xl mb-4">
+            <span class="text-[#FF6AD5]">> SCANNING ENTITY...</span>
+          </div>
+          
+          <div class="space-y-2 terminal-text">
+            <p><span class="text-[#FF6AD5]">> NAME:</span> L0RD_J0RD</p>
+            <p><span class="text-[#FF6AD5]">> AGE:</span> 23.exe</p>
+            <p><span class="text-[#FF6AD5]">> LOCATION:</span> CANADA.sys</p>
+            <p><span class="text-[#FF6AD5]">> STATUS:</span> B0R3D_0F_R34L1TY.dll</p>
+          </div>
+
+          <div class="space-y-4 mt-8">
+            <p class="leading-relaxed">
+              Just your average Canadian nerd ahh boi trapped in the digital void (⌐■_■)
+              Currently exploring the boundaries of AI-assisted web development to escape the mundane...
+            </p>
+            <p class="leading-relaxed">
+              When not crafting websites with AI, you can find me in VRChat 
+              exploring the digital realm, playing Tetris, or creating beats in Ableton ♫♪.♬
+            </p>
+            <p class="leading-relaxed">
+              3D modeling? It's on the TODO list... right after I finish procrastinating (￣▽￣*)ゞ
+            </p>
+          </div>
+        </div>
+      </Window>
+
+      <!-- Skills & Interests -->
+      <Window title="SK1LLZ.DAT" class="h-full">
+        <div class="p-3 sm:p-4 space-y-4">
+          <h3 class="text-[#FF6AD5] mb-4 tracking-wider">CURR3NT_L04D0UT:</h3>
+          <ul class="list-['>'] list-inside space-y-2">
+            <li>Web Development</li>
+            <li>AI Integration</li>
+            <li>VRChat Exploration</li>
+            <li>Music Production</li>
+          </ul>
+          <h3 class="text-[#FF6AD5] mb-4 mt-6 tracking-wider">FUTUR3_QU3$T$:</h3>
+          <ul class="list-['>'] list-inside space-y-2">
+            <li>3D Modeling (Loading...)</li>
+            <li>Reality Hacking</li>
+            <li>Digital Art</li>
+            <li>Vaporwave Mastery</li>
+          </ul>
+        </div>
+      </Window>
+
+      <!-- Current Status -->
+      <Window title="CURR3NT_$T4TU$.LOG" class="h-full">
+        <div class="p-3 sm:p-4 space-y-4">
+          <div class="flex items-center space-x-2">
+            <span class="text-green-400">●</span>
+            <span>Currently vibing in the digital realm...</span>
+          </div>
+          <div class="terminal-text">
+            <p>> Pushing boundaries with AI 🤖</p>
+            <p>> Creating digital experiences ✨</p>
+            <p>> Seeking escape from reality 🌐</p>
+            <p>> Loading motivation.exe... ⌛</p>
+          </div>
+        </div>
+      </Window>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .terminal-text {
+    font-family: monospace;
+    line-height: 1.6;
+  }
+
+  .terminal-text p {
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
+  }
+
+  .terminal-text p:nth-child(1) { animation-delay: 0.1s; }
+  .terminal-text p:nth-child(2) { animation-delay: 0.2s; }
+  .terminal-text p:nth-child(3) { animation-delay: 0.3s; }
+  .terminal-text p:nth-child(4) { animation-delay: 0.4s; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateX(-5px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+</style> 
