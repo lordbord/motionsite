@@ -75,15 +75,25 @@ import Window from './Window.astro';
     if (!messagesDiv) return;
 
     messagesDiv.innerHTML = messages
-      .map(msg => `
-        <div class="message p-2 border border-[#FF6AD5]/50 hover:border-[#FF6AD5] transition-colors relative group">
-          <div class="message-text break-words">${msg.message}</div>
-          <div class="text-[10px] text-[#C774E8] mt-1 group-hover:text-[#FF6AD5] transition-colors">
-            ⚡️ ${formatDate(msg.created_at)}
+      .map(msg => {
+        // Sanitize message text by escaping HTML
+        const sanitizedMessage = msg.message
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+
+        return `
+          <div class="message p-2 border border-[#FF6AD5]/50 hover:border-[#FF6AD5] transition-colors relative group select-none">
+            <div class="message-text break-words font-['Press_Start_2P'] text-white text-sm whitespace-pre-wrap">${sanitizedMessage}</div>
+            <div class="text-[10px] text-[#C774E8] mt-1 group-hover:text-[#FF6AD5] transition-colors font-['Press_Start_2P']">
+              ⚡️ ${formatDate(msg.created_at)}
+            </div>
+            <div class="absolute -inset-[1px] bg-[#FF6AD5]/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
           </div>
-          <div class="absolute -inset-[1px] bg-[#FF6AD5]/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-        </div>
-      `)
+        `;
+      })
       .join('');
   }
 
