@@ -13,8 +13,8 @@ import SignatureBoard from '../components/SignatureBoard.astro';
     <p class="text-sm tracking-[0.3em]">ｅｌｉｔｅ ｈａｘｏｒ</p>
   </div>
 
-  <main class="max-w-4xl mx-auto grid gap-6 mt-32">
-    <Window title="WELCOME.EXE" class="w-full max-w-md mx-auto">
+  <main class="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-6 mt-32 place-items-start">
+    <Window title="WELCOME.EXE" class="w-full">
       <div class="space-y-4">
         <h2 class="text-xl tracking-[0.2em] mb-4">1337 H4X0R Z0N3</h2>
         <p class="text-sm leading-relaxed">
@@ -38,7 +38,7 @@ import SignatureBoard from '../components/SignatureBoard.astro';
       </div>
     </Window>
 
-    <Window title="SKILLS.TXT" class="w-full max-w-md mx-auto">
+    <Window title="SKILLS.TXT" class="w-full">
       <div class="space-y-4">
         <p class="text-sm mb-2">Elite skillz include:</p>
         <ul class="list-['>'] list-inside space-y-2 text-sm">
@@ -51,7 +51,7 @@ import SignatureBoard from '../components/SignatureBoard.astro';
       </div>
     </Window>
 
-    <SignatureBoard />
+    <SignatureBoard class="lg:col-span-2 w-full" />
   </main>
 </Layout>
 

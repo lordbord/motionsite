@@ -48,7 +48,7 @@ const photos: Photo[] = files
     <div class="columns-1 sm:columns-2 lg:columns-3 gap-4 max-w-7xl mx-auto">
       {photos.map(photo => (
         <div class="relative mb-4 break-inside-avoid photo-card" onclick={`expandImage('${photo.url}', '${photo.title}', '${photo.description}')`}>
-          <div class="relative overflow-hidden rounded-lg cursor-zoom-in transform-gpu hover:scale-[1.02] transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,106,213,0.3)]">
+          <div class="relative overflow-hidden rounded-lg transform-gpu hover:scale-[1.02] transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,106,213,0.3)]">
             <Image 
               src={photo.url}
               alt={photo.title}
